@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Sigmar&display=swap" rel="stylesheet">
+    <title>The NYC Files</title>
+    <style>
+        h1{
+            text-align: center;
+            color:aliceblue;
+            font-family: "Anton", sans-serif;
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        p{
+            font-size: 17px;
+        }
+    
+        li {
+            font-size: 15px; 
+        }
+
+        body{
+            background-color: black; 
+            color: white; 
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: "Anton", sans-serif;
+        }
+        #charInput1, #charInput2 {
+            font-size: 16px;
+            padding: 5px;
+            margin: 5px;
+            margin-left: auto;
+            color:rgb(0, 0, 0);
+        }
+
+        /* STYLE FOR THE SUBMIT BUTTON */
+        #submitButton {
+            font-size: 16px;
+            padding: 10px;
+            background-color: rgb(255, 228, 72);
+            border: none;
+            cursor: pointer;
+        }
+
+        #displayedImage {
+            display: none; 
+            margin-top: 20px;
+            width: 400px; 
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+    </style>
+</head>
+<body>
+
+    <h1>THE NEW YORK CITY FILES</h1>
+    <p>a digital archive that brings New York City to life through images.  
+        Enter a letter (A-H) and a number (1-5) to unlock a hidden piece of the city’s history, culture, and landmarks.</p>
+    
+    <h2>Choose a Letter:</h2>
+
+    <li><b>A</b> - Broadway Shows 🎭</li>
+    <li><b>B</b> - Landmarks 🏙️</li>
+    <li><b>C</b> - Iconic Object 🗽</li>
+    <li><b>D</b> - Parks & Green Spaces 🌳</li>
+    <li><b>E</b> - Streets & Neighborhoods 🚕</li>
+    <li><b>F</b> - Famous NYC Foods 🌭</li>
+    <li><b>G</b> - Subway 🚇</li>
+    <li><b>H</b> - Historic NYC Hotels 🏨</li>
+
+
+        
+    <!-- Letter input (A-H) -->
+    <label for="charInput1">Enter a letter (A-H):</label>
+    <input type="text" id="charInput1" maxlength="1">
+
+    <!-- Number input (1-5) -->
+    <label for="charInput2">Enter a number (1-5):</label>
+    <input type="text" id="charInput2" maxlength="1">
+
+    <!-- Button to show image -->
+    <button onclick="displayImage()" id="submitButton">Show Image</button>
+
+    <img id="displayedImage" src="" alt="Displayed Image">
+
+
+   
+    <script>
+        function displayImage() {
+            // Get input values
+            let inputLetter = document.getElementById("charInput1").value.toUpperCase();
+            let inputNumber = document.getElementById("charInput2").value;
+
+            // Convert inputNumber from string to number
+            inputNumber = parseInt(inputNumber);
+
+            // letter input
+            if (inputLetter < "A" || inputLetter > "H") {
+                alert("Please enter a letter from A to H.");
+                return;
+            }
+
+            // number input
+            if (isNaN(inputNumber) || inputNumber < 1 || inputNumber > 5) {
+                alert("Please enter a number between 1 and 5.");
+                return;
+            }
+
+            //image database
+            let imageDatabase = {
+                "A": [
+                    "images/a1.jpg",
+                    "images/a2.jpg",
+                    "images/a3.jpeg",
+                    "images/a4.jpeg",
+                    "images/a5.jpg"
+                ],
+                "B": [
+                    "images/b1.jpg",
+                    "images/b2.jpg",
+                    "images/b3.jpg",
+                    "images/b4.jpg",
+                    "images/b5.jpg"
+                ],
+                "C": [
+                    "images/c1.jpg",
+                    "images/c2.jpg",
+                    "images/c3.jpg",
+                    "images/c4.jpg",
+                    "images/c5.jpg"
+                ],
+                "D": [
+                    "images/d1.jpg",
+                    "images/d2.jpg",
+                    "images/d3.jpg",
+                    "images/d4.jpg",
+                    "images/d5.jpg"
+                ],
+                "E": [
+                    "images/e1.jpg",
+                    "images/e2.jpg",
+                    "images/e3.jpg",
+                    "images/e4.jpg",
+                    "images/e5.jpg"
+                ],
+                "F": [
+                    "images/f1.jpg",
+                    "images/f2.jpg",
+                    "images/f3.jpg",
+                    "images/f4.jpg",
+                    "images/f5.jpg"
+                ],
+                "G": [
+                    "images/g1.jpg",
+                    "images/g2.jpg",
+                    "images/g3.jpg",
+                    "images/g4.jpg",
+                    "images/g5.jpg"
+                ],
+                "H": [
+                    "images/h1.jpg",
+                    "images/h2.jpg",
+                    "images/h3.jpg",
+                    "images/h4.jpg",
+                    "images/h5.jpg"
+                ]
+            };
+
+            // Get the image element
+            let imgElement = document.getElementById("displayedImage");
+
+            if (imageDatabase[inputLetter]) {
+                let selectedImage = imageDatabase[inputLetter][inputNumber - 1];
+
+                if (selectedImage) {
+                    imgElement.src = selectedImage;
+                    imgElement.style.display = "block"; // Show the image
+                } else {
+                    alert("No image found.");
+                }
+            } else {
+                alert("No images available for this letter.");
+            }
+        }
+    </script>
+
+</body>
+</html>
